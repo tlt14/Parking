@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="report_parking_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"></div> 
+                    <div class="text-center h3">REPORT PARKING LOT</div>
+                    <table class="">
+                        <tr>
+                            <td>Parking lot</td>
+                            <td>:</td>
+                            <td>
+                                <t t-if="form.get('parking_lot_id')">
+                                    <t t-esc="form['parking_lot_id'][1]"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>From date</td>
+                            <td>:</td>
+                            <td>
+                                <t t-esc="form['date_from']"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>To date</td>
+                            <td>:</td>
+                            <td>
+                                <t t-esc="form['date_to']"/>
+                            </td>
+                        </tr>
+                    </table> 
+                    <br />
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th name="th_ticket_count" class="text-left">
+                                    <span>Ticket count</span>
+                                </th>
+                            
+                                <th name="th_total_price" class="text-left">
+                                    <span>Total price</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                <t t-esc="ticket_count"/>
+                            </td>
+                            <td>
+                                <t t-esc="total_price"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th name="th_ticket_count" class="text-left">
+                                    <span>Code</span>
+                                </th>
+                                <th name="th_total_price" class="text-left">
+                                    <span>Vehicle</span>
+                                </th>
+                                <th name="th_total_price" class="text-left">
+                                    <span>Parking Lot</span>
+                                </th>
+                                <th name="th_total_price" class="text-left">
+                                    <span>Price</span>
+                                </th>
+                            </tr>
+                        </thead>
+                            <t t-foreach="tickets" t-as="item">
+                                <tr>
+                                    <td>
+                                        <t t-esc="item['name_seq']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['vehicle_id'][1]"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="item['parking_lot_id'][1]"/>
+                                    </td> 
+                                    <td>
+                                        <t t-esc="item['price']"/>
+                                    </td>
+                                </tr>    
+                            </t>
+                    </table>               
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

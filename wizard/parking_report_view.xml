@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="parking_lot_report_view_form" model="ir.ui.view">
+        <field name="name">parking.report.wizard</field>
+        <field name="model">parking.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="parking_lot_id" />
+                            <field name="vehicle_id" />
+                        </group>
+                        <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_print_report" string="Print" type="object" class="btn-primary"/>
+                        <button name="action_print_xlsx" string="Report xlsx" type="object" class="btn-primary ml-3"/>
+                        <!-- button cancel -->
+                        <button  string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="report_action_parking_lot" model="ir.actions.act_window">
+        <field name="name">Parking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">parking.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="parking_lot_report_view_form"/>
+    </record>
+    
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="test_menu_root" name="Parking Lot">
+        <menuitem id="level_menu_1" name="Parking Lot" action="parking_lot_action" sequence="5"/>    
+        <menuitem id="parking_ticket_menu" name="Parking Ticket" action="parking_ticket_action" sequence="10"/>
+        <menuitem id="menu_reporting" name="Reporting"  sequence="15">
+            <menuitem id="menu_parking_lot_report" name="Parking Lot Report"  action="report_action_parking_lot" />
+        </menuitem> 
+        <menuitem id="menu_setting" name="Setting" sequence="25">
+            <menuitem id="level_menu_3" name="Vehicle" action="parking_vehicle_action" />
+            <menuitem id="parking_pricelist_menu" name="Parking Price List" action="parking_pricelist_action" />
+            <menuitem id="parking_calendar" name="Resource Calendar" action="action_resource_calendar" />
+        </menuitem>  
+    </menuitem>
+    
+</odoo>

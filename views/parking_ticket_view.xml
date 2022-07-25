@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="parking_ticket_view_tree" model="ir.ui.view">
+        <field name="name">parking.ticket.view.tree</field>
+        <field name="model">parking.ticket</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'out'" 
+                    decoration-danger="state == 'in'"
+                    decoration-bf="state == 'in'"
+                    default_order="state asc"
+                    >
+                <field name="name_seq" />
+                <field name="image"  />
+                <field name="vehicle_id" />
+                <field name="time_start" />
+                <field name="time_end" />
+                <field name="total_time" />
+                <field name="price" />
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="parking_ticket_view_form" model="ir.ui.view">
+        <field name="name">parking.ticket.view.form</field>
+        <field name="model">parking.ticket</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_finish" type="object" string="Xe ra" class="btn btn-primary" 
+                        attrs="{'invisible': [('state' ,'=','out')] }"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name_seq"/>
+                        <field name="image" />
+                        <field name="vehicle_id" />
+                        <field name="parking_lot_id" />
+                        <field name="time_start" />
+                        <field name="time_end" />
+                        <field name="total_time" />
+                        <field name="price" />
+                        <field name="state" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="parking_ticket_view_search" model="ir.ui.view">
+        <field name="name">parking.ticket.view.search</field>
+        <field name="model">parking.ticket</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <!-- <field name="state" filter_domain="[('state', '=', 'in')]"></field> -->
+                <filter name="state_filter" string="Xe chưa thanh toán" domain="[('state', '=',  'in')]"/>
+            </search>
+        </field>
+    </record>
+    <record id="parking_ticket_action" model="ir.actions.act_window">
+        <field name="name">ticket action</field>
+        <field name="res_model">parking.ticket</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
