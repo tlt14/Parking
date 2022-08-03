@@ -10,4 +10,4 @@ class Parking_vehicle(models.Model):
     # ---------------------------------------- Fields ----------------------------------------------
     name = fields.Char("Name",required=True)
     # ---------------------------------------- Relational Fields-------------------------------------
-    parking_lot_id = fields.Many2one('parking.lot',string = 'Parking Lot')
+    park_veh_ref = fields.One2many('parking.vehicle.ref','vehicle_id',string = 'Parking Vehicle')

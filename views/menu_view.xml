@@ -11,6 +11,7 @@
             <menuitem id="level_menu_3" name="Vehicle" action="parking_vehicle_action" />
             <menuitem id="parking_pricelist_menu" name="Parking Price List" action="parking_pricelist_action" />
             <menuitem id="parking_calendar" name="Resource Calendar" action="action_resource_calendar" />
+            <menuitem id="parking_veh_ref" name="Limit veh" action="action_parking_veh_ref" />
         </menuitem>  
     </menuitem>
     

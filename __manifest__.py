@@ -20,6 +20,7 @@
         'views/parking_vehicle_view.xml',
         'views/parking_ticket_view.xml',
         'views/parking_pricelist_view.xml',
+        'views/parking_vehicle_ref.xml',
         'reports/parking_lot_detail.xml',
         'reports/report.xml',
         'wizard/parking_report_view.xml',   

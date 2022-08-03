@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="parking_vehicle_view_tree" model="ir.ui.view">
+        <field name="name">parking.vehicle.view.tree</field>
+        <field name="model">parking.vehicle.ref</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="parking_lot_id" />
+                <field name="vehicle_id" />
+                <field name="limit_veh" />
+            </tree>
+        </field>
+    </record>
+    <record id="parking_vehicle_view_form" model="ir.ui.view">
+        <field name="name">parking.vehicle.view.form</field>
+        <field name="model">parking.vehicle.ref</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="parking_lot_id" />
+                        <field name="vehicle_id" />
+                        <field name="limit_veh" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_parking_veh_ref" model="ir.actions.act_window">
+        <field name="name">Vehicle action</field>
+        <field name="res_model">parking.vehicle.ref</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

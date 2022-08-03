@@ -38,9 +38,7 @@ class Parking_ticket(models.Model):
             vals['name_seq'] = self.env['ir.sequence'].next_by_code('project.task')+str(today.day)+str(today.month)+str(today.year) or 'New'       
             parking_lot = self.env['parking.lot'].search([('id','=',vals['parking_lot_id'])]).working_time()
         if parking_lot == False:
-            raise ValidationError('Bãi xe đã đóng cổng')
-        if self.env['parking.lot'].search([('id','=',vals['parking_lot_id'])]).blank == 0:
-            raise ValidationError('This parking lot is full')
+            raise ValidationError('Parking lot is not working')
         else:
             result = super().create(vals)
             return result
@@ -65,20 +63,17 @@ class Parking_ticket(models.Model):
         tmp = self.env['parking.pricelist.item'].search([('pricelist_id','=',self.pricelist_id.id),('vehicle_id','=',self.vehicle_id.id)])
         self.price = math.ceil(tmp.price * hours)
         self.state = 'out'
-        self.parking_lot_id.blank += 1
 
     # ---------------------------------------- Onchange Methods -------------------------------- 
-    @api.onchange('vehicle_id')
-    def _onchange_vehicle_id(self):
-        # data= self.env['resource.calendar.attendance'].search([('calendar_id','=',self.resource_calendar.id),('dayofweek','=',date.weekday(date.today()))])
-        # print(self.parking_lot_id.working_time)
-        tmp = []
-        if self.vehicle_id:
-            parking_lot_id  = self.env['parking.lot'].search([('vehicle_id','=',self.vehicle_id.id)])
-            if parking_lot_id:
-                for x in parking_lot_id:
-                    if (x.blank > 0):
-                        tmp.append(x.id)
-                return {'domain': {'parking_lot_id': [('id', 'in', tmp)]}}
+    # @api.onchange('vehicle_id')
+    # def _onchange_vehicle_id(self):
+    #     tmp = []
+    #     if self.vehicle_id:
+    #         parking_lot_id  = self.env['parking.lot'].search([('vehicle_id','=',self.vehicle_id.id)])
+    #         if parking_lot_id:
+    #             for x in parking_lot_id:
+    #                 if (x.blank > 0):
+    #                     tmp.append(x.id)
+    #             return {'domain': {'parking_lot_id': [('id', 'in', tmp)]}}
         
     

@@ -11,15 +11,14 @@ class Parking_lot(models.Model):
 
     # ---------------------------------------- Fields ----------------------------------------------
     name = fields.Char(default='Parking')
-    limit_veh = fields.Integer(string = 'Limit Vehicle')
-
     # Computed
     state_in_count = fields.Integer(compute = '_state_in_count')
-    blank = fields.Integer(string = 'Blank', compute = '_blank')
     
     #--------------------------------------- Relational Fields-------------------------------------
     # bãi xe -> loại xe
-    vehicle_id = fields.Many2one('parking.vehicle',string = 'Vehicle')
+    # bãi xe -> park_veh -> loại xe
+    # 1 bãi xe có nhiều loại xe
+    vehicle_ids = fields.One2many('parking.vehicle.ref','parking_lot_id',string = 'Vehicle')    
 
     # bãi xe -> price_list
     pricelist_id = fields.Many2one('parking.pricelist',string = 'Pricelist')
@@ -29,8 +28,7 @@ class Parking_lot(models.Model):
 
     resource_calendar = fields.Many2one('resource.calendar',string = 'Resource Calendar')
 
-
-    
+    location = fields.Char(default=lambda self:self.get_location())
     #--------------------------------------Actions-------------------------------- 
     def action_show_tickets(self):
         return {
@@ -48,11 +46,7 @@ class Parking_lot(models.Model):
         for rec in self:
             rec.state_in_count = len([x for x in rec.ticket_ids if x.state == 'in'])
     
-    @api.depends('state_in_count')
-    def _blank(self):
-        for rec in self:
-            rec.blank = rec.limit_veh - rec.state_in_count
-
+    
     # -------------------------------Methods----------------------------------------------------
     def working_time(self):
         # set timezone VietNamese
@@ -61,10 +55,7 @@ class Parking_lot(models.Model):
         tz = pytz.timezone(timezone)
         # get current time
         now = datetime.now(tz)
-        
-        # print("hour=================",now.hour)
-        # print("minutes=================",now.minute)
-        # print("ngày=================",self.resource_calendar.attendance_ids)
+
         data= self.env['resource.calendar.attendance'].search([('calendar_id','=',self.resource_calendar.id),('dayofweek','=',date.weekday(date.today()))])
         # print("week=================",data)
         x=[x.hour_from for x in data]
@@ -73,7 +64,5 @@ class Parking_lot(models.Model):
         # print("y=================",y)
         for i in range(len(x)):
             if x[i]<=now.hour+(now.minute /60)<=y[i]:
-                # print("true")
                 return True
-        # print("false")
         return False
