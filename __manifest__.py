@@ -15,7 +15,6 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'data/sequence.xml',
         'views/parking_lot_view.xml',
         'views/parking_vehicle_view.xml',
         'views/parking_ticket_view.xml',
@@ -25,6 +24,7 @@
         'reports/report.xml',
         'wizard/parking_report_view.xml',   
         'views/menu_view.xml',
+        'data/sequence.xml',
     ],
     # 'qweb': ['static/src/xml/*.xml'],
     'installable': True,

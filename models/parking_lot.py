@@ -15,7 +15,6 @@ class Parking_lot(models.Model):
     state_in_count = fields.Integer(compute = '_state_in_count')
     
     #--------------------------------------- Relational Fields-------------------------------------
-    # bãi xe -> loại xe
     # bãi xe -> park_veh -> loại xe
     # 1 bãi xe có nhiều loại xe
     vehicle_ids = fields.One2many('parking.vehicle.ref','parking_lot_id',string = 'Vehicle')    
@@ -28,7 +27,6 @@ class Parking_lot(models.Model):
 
     resource_calendar = fields.Many2one('resource.calendar',string = 'Resource Calendar')
 
-    location = fields.Char(default=lambda self:self.get_location())
     #--------------------------------------Actions-------------------------------- 
     def action_show_tickets(self):
         return {
@@ -66,3 +64,5 @@ class Parking_lot(models.Model):
             if x[i]<=now.hour+(now.minute /60)<=y[i]:
                 return True
         return False
+
+    

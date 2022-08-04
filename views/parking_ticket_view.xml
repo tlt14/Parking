@@ -36,7 +36,7 @@
                         <field name="name_seq"/>
                         <field name="image" />
                         <field name="vehicle_id" />
-                        <field name="parking_lot_id" />
+                        <field name="parking_lot_id" invisible='1'/>
                         <field name="time_start" />
                         <field name="time_end" />
                         <field name="total_time" />
